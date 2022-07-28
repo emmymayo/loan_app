@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserLoansTable extends Migration
+class CreateCustomerLoansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateUserLoansTable extends Migration
      */
     public function up()
     {
-        Schema::create('customer_loans', function (Blueprint $table) {
+        Schema::create('customer_loan', function (Blueprint $table) {
             $table->id();
             $table->foreignId('customer_id');
             $table->foreignId('loan_id');

@@ -19,6 +19,19 @@ class Customer extends Model
      */
     protected $fillable = [
         'name',
-        'acount_info',
+        'account_info',
     ];
+
+    public function loans()
+    {
+        return $this->belongsToMany(Loan::class, 'customer_loan', 'customer_id', 'loan_id');
+    }
+
+    public static function statusMapping()
+    {
+        return [
+            self::STATUS_ACTIVE => 'Active',
+            self::STATUS_INACTIVE => 'Inactive'
+        ];
+    }
 }

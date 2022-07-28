@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\Loan;
 
 class CreateLoansTable extends Migration
 {
@@ -18,7 +19,8 @@ class CreateLoansTable extends Migration
             $table->string('name');
             $table->bigInteger('principal');
             $table->bigInteger('interest');
-            $table->tinyInteger('interest_type');
+            $table->bigInteger('payment');
+            $table->tinyInteger('interest_type')->default(Loan::INTEREST_TYPE_VALUE);
             $table->tinyInteger('tenure');
             $table->boolean('compounding')->default(false);
             $table->timestamps();

@@ -14,7 +14,10 @@ class LoanFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name'      =>  $this->faker->name,
+            'principal' =>  $this->faker->randomNumber(7),
+            'interest'  =>  $this->faker->randomNumber(3),
+            'tenure'    =>  $this->faker->randomNumber(2)
         ];
     }
 }
