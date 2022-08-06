@@ -13,11 +13,11 @@
             </div>
             <div class="mb-3">
                 <label for="name" class="col-form-label">Interest</label>
-                <input type="number" class="form-control" id="interest" name="interest" value="{{$loan->interest}}">
+                <input type="number" class="form-control" id="interest" step="0.01" name="interest" value="{{$loan->interest}}">
             </div>
             <div class="mb-3">
                 <label for="name" class="col-form-label">Payment</label>
-                <input type="number" class="form-control" id="payment" name="payment" value="{{$loan->payment}}">
+                <input type="number" class="form-control" id="payment"  name="payment" value="{{$loan->payment}}">
             </div>
             <div class="mb-3">
                 <label for="tenure" class="col-form-label">Tenure</label>

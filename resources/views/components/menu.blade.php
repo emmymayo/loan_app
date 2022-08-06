@@ -7,7 +7,7 @@
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{route('customers.index')}}">Customers</a>
@@ -15,7 +15,15 @@
           <li class="nav-item">
             <a class="nav-link" href="{{route('loans.index')}}">Loans</a>
           </li>
-          <li class="nav-item dropdown">
+          @auth
+          <li class="nav-item right">
+            <a class="nav-link" href="{{route('user.profile')}}">Profile</a>
+          </li>
+          <li class="nav-item right">
+            <a class="nav-link" href="{{route('auth.logout')}}">Logout</a>
+          </li>
+          @endauth
+          {{-- <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               
             </a>
@@ -24,7 +32,7 @@
               <li><a class="dropdown-item" href="#">Another action</a></li>
               <li><a class="dropdown-item" href="#">Something else here</a></li>
             </ul>
-          </li>
+          </li> --}}
         </ul>
       </div>
     </div>

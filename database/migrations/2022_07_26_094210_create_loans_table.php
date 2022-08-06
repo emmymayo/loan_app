@@ -20,7 +20,7 @@ class CreateLoansTable extends Migration
             $table->bigInteger('principal');
             $table->bigInteger('interest');
             $table->bigInteger('payment');
-            $table->tinyInteger('interest_type')->default(Loan::INTEREST_TYPE_VALUE);
+            $table->tinyInteger('interest_type')->default(Loan::INTEREST_TYPE_PERCENT);
             $table->tinyInteger('tenure');
             $table->boolean('compounding')->default(false);
             $table->timestamps();

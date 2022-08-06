@@ -1,4 +1,3 @@
-
 <x-header></x-header>
 <x-menu></x-menu>
 
@@ -16,40 +15,45 @@
 </section>
 <section class="customers__table m-5">
     <h1 class="display-2">
-        Customers
+        Customer Account
     </h1>
+    <hr>
+    <h3 class="display-4"> {{$customer->name}}</h3>
+    <h6 class="font-weight-bold h4">Balance: &#8358;{{$balance}}</h6>
     <button type="button" class="btn btn-primary my-5" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Add New</button>
     <table class="table">
         <thead>
             <tr>
             <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Account Information</th>
+            <th scope="col">(&#8358;) Amount</th>
+            <th scope="col">Type </th>
+            <th scope="col">Date </th>
+            <th scope="col">Remark </th>
             <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($customers as $customer )
+            @foreach ($accounts as $account )
             <tr>
                 <th scope="row">{{$loop->index + 1}}</th>
-                <td>{{$customer->name}}</td>
-                <td>{{$customer->account_info}}</td>
+                <td>{{$account->amount}}</td>
+                <td>{{$accountTypeMapping[$account->type]}}</td>
+                <td>{{\Carbon\Carbon::create($account->created_at)->format('d F, Y')}}</td>
+                <td>{{$account->remark}}</td>
                 <td>
-                    <a href="{{route('customers.edit', $customer)}}" class="btn btn-primary mx-2">Edit</a>
-                    <form action="{{route('customers.destroy', $customer)}}" method="post" class="d-inline-block"> 
+                    <a href="/customers/{{$account->customer_id}}/accounts/{{$account->id}}/edit" class="btn btn-primary mx-2">Edit</a>
+                    <form action="/customers/{{$account->customer_id}}/accounts/{{$account->id}}" method="post" class="d-inline-block"> 
                         @csrf 
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger mx-2">Delete</button>
                     </form>
-                    <a href="{{route('customers-loans.index', ['customer_id' => $customer->id])}}" class="btn btn-primary mx-2">Loans</a>
-                    <a href="customers/{{$customer->id}}/accounts" class="btn btn-success mx-2">Accounts</a>
                 </td>
             </tr>
             @endforeach
         </tbody>
     </table>
     <div class="my-5">
-        {{$customers->links()}}
+        {{$accounts->links()}}
     </div>
 
 </section>
@@ -60,18 +64,27 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">New Customer</h5>
+              <h5 class="modal-title" id="exampleModalLabel">Credit / Debit Account</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="{{route('customers.store')}}", method="POST"> @csrf
+            <form action="/customers/{{$customer->id}}/accounts", method="POST"> @csrf
                 <div class="modal-body">
+                    <input type="hidden" name="customer_id" value="{{$customer->id}}">
                     <div class="mb-3">
-                    <label for="recipient-name" class="col-form-label">Name:</label>
-                    <input type="text" class="form-control" id="name" name="name">
+                    <label for="recipient-name" class="col-form-label">Amount</label>
+                    <input type="number" class="form-control" id="amount" name="amount">
                     </div>
                     <div class="mb-3">
-                    <label for="message-text" class="col-form-label">Account Information:</label>
-                    <input type="text" class="form-control" id="account_info" name="account_info">
+                    <label for="recipient-name" class="col-form-label">Remark</label>
+                    <input type="text" class="form-control" id="remark" name="remark">
+                    </div>
+                    <div class="mb-3">
+                    <label for="message-text" class="col-form-label">Type</label>
+                    <select name="type" id="type"  class="form-control">
+                        @foreach ($accountTypeMapping as $key => $value)
+                            <option value="{{$key}}">{{$value}}</option>
+                        @endforeach
+                    </select>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -84,6 +97,4 @@
       </div>
 </section>
 
-
 <x-footer></x-footer>
-

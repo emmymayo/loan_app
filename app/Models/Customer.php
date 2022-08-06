@@ -27,6 +27,11 @@ class Customer extends Model
         return $this->belongsToMany(Loan::class, 'customer_loan', 'customer_id', 'loan_id');
     }
 
+    public function accounts()
+    {
+        return $this->hasMany(Account::class);
+    }
+
     public static function statusMapping()
     {
         return [

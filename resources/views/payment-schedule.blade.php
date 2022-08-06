@@ -7,7 +7,7 @@
 
         <ul class="list-group">
             <li class="list-group-item capitalize">Loan Amount: &#8358;{{$loan->principal}}</li>
-            <li class="list-group-item capitalize">Loan Interest: &#8358;{{$loan->interest}}</li>
+            <li class="list-group-item capitalize">Loan Interest: {{$loan->interest}}%</li>
             <li class="list-group-item capitalize">Tenure: {{$loan->tenure}}</li>
             <li class="list-group-item capitalize">Monthly Payment: &#8358;{{$loan->payment}}</li>
           
@@ -28,7 +28,7 @@
                 <td>{{$month}}</td>
                 <td>{{\Carbon\Carbon::create($start_date)->addMonth($month)->toFormattedDateString()}}</td>
                 <td>&#8358;{{$loan->payment}}</td>
-                <td>&#8358;{{($loan->principal + $loan->interest) - $month * $loan->payment}}</td>
+                <td>&#8358;{{ ($loan->principal + ($loan->interest * 0.01 * $loan->principal)) - $month * $loan->payment}}</td>
             </tr>
         @endfor
     </table>
